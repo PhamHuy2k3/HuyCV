@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import clsx from 'clsx';
 import Heading from '@theme/Heading';
 import styles from './styles.module.css';
@@ -35,7 +36,11 @@ const FeatureList = [
   },
 ];
 
-function Feature({Svg, title, description}) {
+// ⚡ Bolt: Memoized Feature component to prevent unnecessary re-renders.
+// Since these components render SVGs (which can have complex DOM structures)
+// and their props are static during the lifecycle of the HomepageFeatures,
+// memoizing them avoids potentially expensive reconciliation passes.
+const Feature = memo(function Feature({Svg, title, description}) {
   return (
     <div className={clsx('col col--4')}>
       <div className="text--center">
@@ -47,7 +52,7 @@ function Feature({Svg, title, description}) {
       </div>
     </div>
   );
-}
+});
 
 export default function HomepageFeatures() {
   return (
