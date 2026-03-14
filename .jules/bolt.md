@@ -1,0 +1,3 @@
+## 2024-05-24 - Unnecessary Re-renders of Static Components in Docusaurus Pages
+**Learning:** In Docusaurus (and typical React apps), global state changes such as theme toggling or context updates (e.g., `useDocusaurusContext()`) at the top of a page can cause large, static sections (like SVG illustrations in homepage features) to unnecessarily re-render and diff complex DOM elements, hurting performance.
+**Action:** Use `React.memo` to memoize purely static or functionally stable components (`HomepageFeatures`, `Feature`, `HomepageHeader`) to insulate them from global layout or context re-renders.

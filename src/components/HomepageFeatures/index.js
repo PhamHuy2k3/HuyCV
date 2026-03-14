@@ -1,3 +1,4 @@
+import React, { memo } from 'react';
 import clsx from 'clsx';
 import Heading from '@theme/Heading';
 import styles from './styles.module.css';
@@ -35,7 +36,8 @@ const FeatureList = [
   },
 ];
 
-function Feature({Svg, title, description}) {
+// Memoize individual feature to prevent re-rendering when parent layout updates
+const Feature = memo(function Feature({Svg, title, description}) {
   return (
     <div className={clsx('col col--4')}>
       <div className="text--center">
@@ -47,9 +49,11 @@ function Feature({Svg, title, description}) {
       </div>
     </div>
   );
-}
+});
 
-export default function HomepageFeatures() {
+// Memoize the entire features section as it contains static content
+// that doesn't need to re-render when global context/theme changes
+const HomepageFeatures = memo(function HomepageFeatures() {
   return (
     <section className={styles.features}>
       <div className="container">
@@ -61,4 +65,6 @@ export default function HomepageFeatures() {
       </div>
     </section>
   );
-}
+});
+
+export default HomepageFeatures;
