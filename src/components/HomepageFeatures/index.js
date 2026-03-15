@@ -1,3 +1,4 @@
+import React, { memo } from 'react';
 import clsx from 'clsx';
 import Heading from '@theme/Heading';
 import styles from './styles.module.css';
@@ -35,7 +36,11 @@ const FeatureList = [
   },
 ];
 
-function Feature({Svg, title, description}) {
+// ⚡ Bolt Performance Optimization:
+// Memoizing the Feature component to prevent unnecessary re-renders when the parent component re-renders.
+// Since the props (Svg, title, description) for each feature in the static FeatureList rarely change,
+// this reduces rendering overhead.
+const Feature = memo(function Feature({Svg, title, description}) {
   return (
     <div className={clsx('col col--4')}>
       <div className="text--center">
@@ -47,7 +52,7 @@ function Feature({Svg, title, description}) {
       </div>
     </div>
   );
-}
+});
 
 export default function HomepageFeatures() {
   return (
