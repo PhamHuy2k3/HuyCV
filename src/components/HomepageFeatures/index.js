@@ -1,3 +1,4 @@
+import React from 'react';
 import clsx from 'clsx';
 import Heading from '@theme/Heading';
 import styles from './styles.module.css';
@@ -35,7 +36,8 @@ const FeatureList = [
   },
 ];
 
-function Feature({Svg, title, description}) {
+// ⚡ Bolt: Memoized individual features to skip reconciliation if parent re-renders due to theme context changes.
+const Feature = React.memo(function Feature({Svg, title, description}) {
   return (
     <div className={clsx('col col--4')}>
       <div className="text--center">
@@ -47,9 +49,11 @@ function Feature({Svg, title, description}) {
       </div>
     </div>
   );
-}
+});
 
-export default function HomepageFeatures() {
+// ⚡ Bolt: Memoized purely static feature list to prevent redundant re-renders.
+// Expected Impact: Reduces rendering time for the main section on global state updates.
+const HomepageFeatures = React.memo(function HomepageFeatures() {
   return (
     <section className={styles.features}>
       <div className="container">
@@ -61,4 +65,6 @@ export default function HomepageFeatures() {
       </div>
     </section>
   );
-}
+});
+
+export default HomepageFeatures;
