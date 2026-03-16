@@ -1,3 +1,4 @@
+import React from 'react';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
@@ -7,8 +8,9 @@ import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import Heading from '@theme/Heading';
 import styles from './index.module.css';
 
-function HomepageHeader() {
-  const {siteConfig} = useDocusaurusContext();
+// ⚡ Bolt: Memoized static header and drilled siteConfig prop to avoid duplicate context subscriptions.
+// Expected Impact: Prevents unnecessary reconciliation when parent context updates.
+const HomepageHeader = React.memo(function HomepageHeader({siteConfig}) {
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
       <div className="container">
@@ -26,7 +28,7 @@ function HomepageHeader() {
       </div>
     </header>
   );
-}
+});
 
 export default function Home() {
   const {siteConfig} = useDocusaurusContext();
@@ -34,7 +36,7 @@ export default function Home() {
     <Layout
       title={`Hello from ${siteConfig.title}`}
       description="Description will go into a meta tag in <head />">
-      <HomepageHeader />
+      <HomepageHeader siteConfig={siteConfig} />
       <main>
         <HomepageFeatures />
       </main>
