@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import clsx from 'clsx';
 import Heading from '@theme/Heading';
 import styles from './styles.module.css';
@@ -35,7 +36,10 @@ const FeatureList = [
   },
 ];
 
-function Feature({Svg, title, description}) {
+// ⚡ Bolt: Wrapped Feature component with React.memo() to prevent unnecessary re-renders
+// since its props (Svg, title, description) don't change often.
+// This reduces React render overhead when the parent component re-renders.
+const Feature = memo(function Feature({Svg, title, description}) {
   return (
     <div className={clsx('col col--4')}>
       <div className="text--center">
@@ -47,7 +51,7 @@ function Feature({Svg, title, description}) {
       </div>
     </div>
   );
-}
+});
 
 export default function HomepageFeatures() {
   return (
