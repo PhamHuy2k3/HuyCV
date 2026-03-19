@@ -1,3 +1,4 @@
+import React, { memo } from 'react';
 import clsx from 'clsx';
 import Heading from '@theme/Heading';
 import styles from './styles.module.css';
@@ -35,7 +36,8 @@ const FeatureList = [
   },
 ];
 
-function Feature({Svg, title, description}) {
+// ⚡ Bolt: Memoize Feature component to prevent unnecessary re-renders
+const Feature = memo(function Feature({Svg, title, description}) {
   return (
     <div className={clsx('col col--4')}>
       <div className="text--center">
@@ -47,18 +49,20 @@ function Feature({Svg, title, description}) {
       </div>
     </div>
   );
-}
+});
 
-export default function HomepageFeatures() {
+// ⚡ Bolt: Memoize HomepageFeatures component and use stable keys for map
+export default memo(function HomepageFeatures() {
   return (
     <section className={styles.features}>
       <div className="container">
         <div className="row">
-          {FeatureList.map((props, idx) => (
-            <Feature key={idx} {...props} />
+          {FeatureList.map((props) => (
+            // ⚡ Bolt: Use props.title instead of index as key for better reconciliation
+            <Feature key={props.title} {...props} />
           ))}
         </div>
       </div>
     </section>
   );
-}
+});
