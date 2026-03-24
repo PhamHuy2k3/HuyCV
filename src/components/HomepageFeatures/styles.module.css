@@ -3,6 +3,9 @@
   align-items: center;
   padding: 2rem 0;
   width: 100%;
+  /* ⚡ Bolt: Optimizes rendering performance by deferring the layout and painting of this below-the-fold section until it approaches the viewport */
+  content-visibility: auto;
+  contain-intrinsic-size: 1000px;
 }
 
 .featureSvg {
