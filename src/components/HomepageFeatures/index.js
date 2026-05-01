@@ -54,8 +54,10 @@ export default function HomepageFeatures() {
     <section className={styles.features}>
       <div className="container">
         <div className="row">
-          {FeatureList.map((props, idx) => (
-            <Feature key={idx} {...props} />
+          {FeatureList.map((props) => (
+            // ⚡ Bolt Optimization: Using stable title as key instead of array index
+            // Prevents inefficient DOM reconciliation when list changes
+            <Feature key={props.title} {...props} />
           ))}
         </div>
       </div>
