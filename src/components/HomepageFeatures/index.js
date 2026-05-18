@@ -54,8 +54,9 @@ export default function HomepageFeatures() {
     <section className={styles.features}>
       <div className="container">
         <div className="row">
-          {FeatureList.map((props, idx) => (
-            <Feature key={idx} {...props} />
+          {FeatureList.map((props) => (
+            // Using a stable identifier (title) instead of array index improves React DOM reconciliation
+            <Feature key={props.title} {...props} />
           ))}
         </div>
       </div>
