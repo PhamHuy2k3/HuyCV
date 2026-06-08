@@ -54,8 +54,9 @@ export default function HomepageFeatures() {
     <section className={styles.features}>
       <div className="container">
         <div className="row">
-          {FeatureList.map((props, idx) => (
-            <Feature key={idx} {...props} />
+          {/* ⚡ Bolt Optimization: Use unique data identifiers (props.title) as keys instead of array indices to ensure efficient React DOM reconciliation and prevent unexpected rendering issues if the list order changes. */}
+          {FeatureList.map((props) => (
+            <Feature key={props.title} {...props} />
           ))}
         </div>
       </div>
